@@ -7,12 +7,12 @@ using UnityEngine.UI;
 public class menuManager : MonoBehaviour {
 
     public void onStartClick() {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(5);
     }
 
     public void onCreditsClick()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(4);
     }
 
     public void onQuitClick()

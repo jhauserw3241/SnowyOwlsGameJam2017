@@ -7,7 +7,7 @@ public class loseManager : MonoBehaviour {
 
     public void onTryAgainClick()
     {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(5);
     }
 
     public void onQuitClick()

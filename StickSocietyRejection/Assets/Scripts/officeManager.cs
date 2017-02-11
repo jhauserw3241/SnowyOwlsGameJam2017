@@ -16,7 +16,7 @@ public class officeManager : MonoBehaviour {
 	void Update () {
         seconds++;
         if (seconds >= totSeconds) {
-            SceneManager.LoadScene(5);
+            SceneManager.LoadScene(6);
         }
 	}
 }

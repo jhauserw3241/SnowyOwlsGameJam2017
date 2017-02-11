@@ -17,17 +17,33 @@ public class PlayerController : MonoBehaviour {
             transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
 
             //TODO: Fix line 20 (need to convert this to GameObject)
-            GameObject frontLegs = getChildGameObject(this,"FrontLeg");
-            frontLegs.GetComponent<Animation>().Play("catWalking");
+            //GameObject frontLegs = getChildGameObject(this,"FrontLeg");
+            //frontLegs.GetComponent<Animation>().Play("catWalking");
         }
-	}
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));
 
-    // Taken from: http://answers.unity3d.com/questions/183649/how-to-find-a-child-gameobject-by-name.html
-    static public GameObject getChildGameObject(GameObject fromGameObject, string withName)
-    {
-        //Author: Isaac Dart, June-13.
-        Transform[] ts = fromGameObject.transform.GetComponentsInChildren();
-        foreach (Transform t in ts) if (t.gameObject.name == withName) return t.gameObject;
-        return null;
+            //TODO: Fix line 20 (need to convert this to GameObject)
+            //GameObject frontLegs = getChildGameObject(this,"FrontLeg");
+            //frontLegs.GetComponent<Animation>().Play("catWalking");
+        }
+        if (Input.GetKey(KeyCode.Space))
+        {
+            transform.Translate(new Vector3(0, speed * Time.deltaTime, 0));
+
+            //TODO: Fix line 20 (need to convert this to GameObject)
+            //GameObject frontLegs = getChildGameObject(this,"FrontLeg");
+            //frontLegs.GetComponent<Animation>().Play("catWalking");
+        }
     }
+
+    //// Taken from: http://answers.unity3d.com/questions/183649/how-to-find-a-child-gameobject-by-name.html
+    //static public GameObject getChildGameObject(GameObject fromGameObject, string withName)
+    //{
+    //    //Author: Isaac Dart, June-13.
+    //    Component[] cs = fromGameObject.transform.GetComponentsInChildren();
+    //    foreach (Component t in cs) if (t.gameObject.name == withName) return t.gameObject;
+    //    return null;
+    //}
 }
