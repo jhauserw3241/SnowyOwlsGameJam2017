@@ -3,22 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class level1Camera : MonoBehaviour {
-    int currentTick;
-    double rate = 5; // This is seconds per ft movement
+    double start;
+    private Vector3 pos;
 
-	// Use this for initialization
-	void Start () {
-        currentTick = 0;
+    // Use this for initialization
+    void Start () {
+        start = Time.time;
+        pos = transform.position;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        currentTick++;
-
-		if ((currentTick % 5) == 0) {
-            transform.Translate(new Vector3((float)(rate * Time.deltaTime), 0, 0));
-
-            rate += 0.01;
+        if (Time.time > (start + 21.0))
+        {
+            pos.x += 0.05f;
+            transform.position = pos;
         }
 	}
 }

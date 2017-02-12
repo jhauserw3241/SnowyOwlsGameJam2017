@@ -1,15 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
-    int speed = 5;
+    int walkSpeed = 5;
+    int jumpSpeed = 200;
+    double start;
+    bool safe = false;
+    bool onGround = true;
 
 	// Use this for initialization
 	void Start () {
-		
-	}
+        start = Time.time;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -19,22 +21,35 @@ public class PlayerController : MonoBehaviour {
             DeathIsUponUs();
         }
 
-        // Handle walking right
-        if (Input.GetKey(KeyCode.RightArrow)) {
-            transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
-            runWalkingAnimation();
+        if ((Time.time >= start + 60.0) && (!safe)) {
+            DeathIsUponUs();
         }
-        // Handle walking left
-        if (Input.GetKey(KeyCode.LeftArrow))
+
+        if (Time.time > (start + 21.0))
         {
-            transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));
-            runWalkingAnimation();
-        }
-        // Handle jumping
-        if (Input.GetKey(KeyCode.Space))
-        {
-            transform.Translate(new Vector3(0, speed * Time.deltaTime, 0));
-            runJumpingAnimation();
+            // Handle walking right
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                transform.Translate(new Vector3(walkSpeed * Time.deltaTime, 0, 0));
+                runWalkingAnimation();
+            }
+            // Handle walking left
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                transform.Translate(new Vector3(-walkSpeed * Time.deltaTime, 0, 0));
+                runWalkingAnimation();
+            }
+            // Handle jumping
+            if (Input.GetKey(KeyCode.Space))
+            {
+                if (onGround) {
+                    onGround = false;
+
+                    transform.Translate(new Vector3(0, jumpSpeed * Time.deltaTime, 0));
+                    runJumpingAnimation();
+                }
+                
+            }
         }
     }
 
@@ -45,6 +60,15 @@ public class PlayerController : MonoBehaviour {
 
         if (coll.gameObject.tag == "Poison") {
             DeathIsUponUs();
+        }
+
+        if (coll.gameObject.tag == "Ledge") {
+            safe = true;
+        }
+
+        if (coll.gameObject.tag == "Ground")
+        {
+            onGround = true;
         }
     }
 
@@ -69,13 +93,4 @@ public class PlayerController : MonoBehaviour {
     void DeathIsUponUs() {
         SceneManager.LoadScene(3);
     }
-
-    //// Taken from: http://answers.unity3d.com/questions/183649/how-to-find-a-child-gameobject-by-name.html
-    //static public GameObject getChildGameObject(GameObject fromGameObject, string withName)
-    //{
-    //    //Author: Isaac Dart, June-13.
-    //    Component[] cs = fromGameObject.transform.GetComponentsInChildren();
-    //    foreach (Component t in cs) if (t.gameObject.name == withName) return t.gameObject;
-    //    return null;
-    //}
 }

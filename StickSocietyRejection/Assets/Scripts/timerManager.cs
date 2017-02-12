@@ -1,31 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class timerManager : MonoBehaviour {
-    int currentTick;
-    static int rate = 5; // This is seconds per ft movement
+    double start;
 
     // Use this for initialization
     void Start()
     {
-        currentTick = 0;
+        start = Time.time;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentTick++;
-
-        if ((currentTick % 5) == 0)
-        {
-            transform.Translate(new Vector3(rate * Time.deltaTime, 0, 0));
+        if (Time.time > (start + 21.0)) {
+            GetComponent<Text>().text = (GetTimerValue()).ToString();
         }
 
-        //Component.guiText = "lolz";
+        if (((Time.time - start) > 60.0) && (GetComponent<Text>().text != "")) {
+            GetComponent<Text>().text = ("");
+        }
     }
 
-    void SetTimer(int minutes, int seconds) {
-        
+    double GetTimerValue() {
+        return 60.0 - (Time.time - start);
     }
 }
