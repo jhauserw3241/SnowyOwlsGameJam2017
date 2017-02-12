@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class loadingManager : MonoBehaviour {
     int currentSec;
-    int totalSecs = 10;
+    int totalSecs = 20;
 
 	// Use this for initialization
 	void Start () {

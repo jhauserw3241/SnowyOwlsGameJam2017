@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class level1Camera : MonoBehaviour {
     int currentTick;
-    static int rate = 5; // This is seconds per ft movement
+    double rate = 5; // This is seconds per ft movement
 
 	// Use this for initialization
 	void Start () {
@@ -16,7 +16,9 @@ public class level1Camera : MonoBehaviour {
         currentTick++;
 
 		if ((currentTick % 5) == 0) {
-            transform.Translate(new Vector3(rate * Time.deltaTime, 0, 0));
+            transform.Translate(new Vector3((float)(rate * Time.deltaTime), 0, 0));
+
+            rate += 0.01;
         }
 	}
 }
